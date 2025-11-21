@@ -47,7 +47,6 @@ namespace ProyectoTecWeb.Services
                 UserId = dto.UserId,
                 Name = dto.Name,
                 Phone = dto.Phone,
-                Specialty = dto.Specialty
             }; 
             await _repo.AddAsync(created); 
             await _repo.SaveChangesAsync(); 

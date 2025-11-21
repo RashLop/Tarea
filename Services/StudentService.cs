@@ -7,30 +7,30 @@ using ProyectoTecWeb.Repository;
 
 namespace ProyectoTecWeb.Services
 {
-    public class DoctorService: IDoctorService
+    public class StudentService: IStudentService
     {
-        private readonly IDoctorRepository _repo; 
-        public DoctorService(IDoctorRepository repo) => _repo = repo; 
+        private readonly IStudentRepository _repo; 
+        public StudentService(IStudentRepository repo) => _repo = repo; 
 
-        public async Task<DoctorResponse> GetOneDoctor(Guid id)
+        public async Task<StudentResponse> GetOneStudent(Guid id)
         {
-            var doc = await _repo.GetDoctor(id); 
-            if(doc is null) throw new ArgumentException("Doctor not found"); 
-            var response = new DoctorResponse
+            var doc = await _repo.GetStudent(id); 
+            if(doc is null) throw new ArgumentException("Student not found"); 
+            var response = new StudentResponse
             {
-                DoctorId = doc.DoctorId,
+                StudentId = doc.StudentId,
                 Name = doc.Name,
                 Phone = doc.Phone,
                 Specialty = doc.Specialty
             }; 
             return response; 
         } 
-        public async Task<IEnumerable<DoctorResponse>> GetAllDoctors()
+        public async Task<IEnumerable<StudentResponse>> GetAllStudents()
         {
-            var items = await _repo.GetAllDoctorsAsync(); 
-            var response = items.Select(doc => new DoctorResponse
+            var items = await _repo.GetAllStudentsAsync(); 
+            var response = items.Select(doc => new StudentResponse
             {
-                DoctorId = doc.DoctorId,
+                StudentId = doc.StudentId,
                 Name = doc.Name,
                 Phone = doc.Phone,
                 Specialty = doc.Specialty
@@ -38,12 +38,12 @@ namespace ProyectoTecWeb.Services
             return response; 
         } 
 
-        public async Task<Doctor> CreateDoctor(CreateDoctorDto dto)
+        public async Task<Student> CreateStudent(CreateStudentDto dto)
         {
             
-            var created = new Doctor
+            var created = new Student
             {
-                DoctorId = Guid.NewGuid(),
+                StudentId = Guid.NewGuid(),
                 UserId = dto.UserId,
                 Name = dto.Name,
                 Phone = dto.Phone,
@@ -54,21 +54,20 @@ namespace ProyectoTecWeb.Services
             return created; 
         } 
 
-        public async Task<Doctor> UpdateDoctor( UpdateDoctorDto dto, Guid id)
+        public async Task<Student> UpdateStudent( UpdateStudentDto dto, Guid id)
         {
-            var doctor = await _repo.GetDoctor(id);
-            if(doctor is null) throw new ArgumentException("Doctor not found");  
-            doctor.Name = dto.Name;
-            doctor.Phone = dto.Phone; 
-            doctor.Specialty = dto.Specialty; 
-            await _repo.UpadteAsync(doctor); 
-            return doctor; 
+            var Student = await _repo.GetStudent(id);
+            if(Student is null) throw new ArgumentException("Student not found");  
+            Student.Name = dto.Name;
+            Student.Phone = dto.Phone; 
+            await _repo.UpadteAsync(Student); 
+            return Student; 
         }
 
         public async Task Delete(Guid id)
         {
-            var deleted = await _repo.GetDoctor(id); 
-            if(deleted is null) throw new ArgumentException("Doctor not found"); 
+            var deleted = await _repo.GetStudent(id); 
+            if(deleted is null) throw new ArgumentException("Student not found"); 
             await _repo.DeleteAsync(deleted); 
         }
     }

@@ -4,14 +4,14 @@ using ProyectoTecWeb.Models.DTO;
 
 namespace ProyectoTecWeb.Services
 {
-    public interface IDoctorService
+    public interface IStudentService
     {
-        Task<DoctorResponse> GetOneDoctor(Guid id); 
-        Task<IEnumerable<DoctorResponse>> GetAllDoctors(); 
+        Task<StudentResponse> GetOneStudent(Guid id); 
+        Task<IEnumerable<StudentResponse>> GetAllStudents(); 
 
-        Task<Doctor> CreateDoctor(CreateDoctorDto dto); 
+        Task<Student> CreateStudent(CreateStudentDto dto); 
 
-        Task<Doctor> UpdateDoctor(UpdateDoctorDto dto, Guid id); 
+        Task<Student> UpdateStudent(UpdateStudentDto dto, Guid id); 
 
         Task Delete (Guid id); 
 

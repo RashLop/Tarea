@@ -9,7 +9,7 @@ namespace ProyectoTecWeb.Data
         public AppDbContext(DbContextOptions<AppDbContext> opt) : base(opt) { }
 
         public DbSet<User> users => Set<User>();
-        public DbSet<Doctor> doctors => Set<Doctor>();
+        public DbSet<Student> Students => Set<Student>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -26,15 +26,14 @@ namespace ProyectoTecWeb.Data
                 u.HasIndex(u => u.Email).IsUnique();
             });
 
-            modelBuilder.Entity<Doctor>(d =>
+            modelBuilder.Entity<Student>(d =>
             {
-                d.HasKey(d => d.DoctorId);
+                d.HasKey(d => d.StudentId);
                 d.Property(d => d.Name).IsRequired().HasMaxLength(50);
                 d.Property(d => d.Phone).IsRequired().HasMaxLength(50);
-                d.Property(d => d.Specialty).IsRequired().HasMaxLength(100);
                 d.HasOne(d => d.user)
                     .WithOne()
-                    .HasForeignKey<Doctor>(d => d.UserId)
+                    .HasForeignKey<Student>(d => d.UserId)
                     .OnDelete(DeleteBehavior.Cascade);
             });
         }

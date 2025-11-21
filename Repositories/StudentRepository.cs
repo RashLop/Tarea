@@ -4,32 +4,32 @@ using ProyectoTecWeb.Models;
 
 namespace ProyectoTecWeb.Repository
 {
-    public class DoctorRepository: IDoctorRepository
+    public class StudentRepository: IStudentRepository
     {
         private readonly AppDbContext _ctx;
-        public DoctorRepository(AppDbContext ctx)
+        public StudentRepository(AppDbContext ctx)
         {
             _ctx = ctx; 
         }
 
-        public Task<Doctor?> GetDoctor(Guid id) => _ctx.doctors.FirstOrDefaultAsync(x => x.DoctorId == id); 
-        public async Task AddAsync(Doctor doctor)
+        public Task<Student?> GetStudent(Guid id) => _ctx.Students.FirstOrDefaultAsync(x => x.StudentId == id); 
+        public async Task AddAsync(Student Student)
         {
-            await _ctx.doctors.AddAsync(doctor); 
+            await _ctx.Students.AddAsync(Student); 
         } 
-        public async Task UpadteAsync(Doctor doctor)
+        public async Task UpadteAsync(Student Student)
         {
-            _ctx.doctors.Update(doctor);
+            _ctx.Students.Update(Student);
             await _ctx.SaveChangesAsync(); 
         } 
-        public async Task DeleteAsync(Doctor doctor)
+        public async Task DeleteAsync(Student Student)
         {
             
-            _ctx.doctors.Remove(doctor); 
+            _ctx.Students.Remove(Student); 
             await _ctx.SaveChangesAsync(); 
         }
 
-        public async Task<IEnumerable<Doctor>> GetAllDoctorsAsync()=> await _ctx.doctors.ToListAsync();  
+        public async Task<IEnumerable<Student>> GetAllStudentsAsync()=> await _ctx.Students.ToListAsync();  
 
         public async Task SaveChangesAsync()
         {

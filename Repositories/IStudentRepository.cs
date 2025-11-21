@@ -2,13 +2,13 @@ using ProyectoTecWeb.Models;
 
 namespace ProyectoTecWeb.Repository
 {
-    public interface IDoctorRepository
+    public interface IStudentRepository
     {
-        Task<Doctor?> GetDoctor(Guid id); 
-        Task AddAsync(Doctor doctor); 
-        Task UpadteAsync(Doctor doctor); 
-        Task DeleteAsync(Doctor doctor); 
-        Task<IEnumerable<Doctor>> GetAllDoctorsAsync(); 
+        Task<Student?> GetStudent(Guid id); 
+        Task AddAsync(Student Student); 
+        Task UpadteAsync(Student Student); 
+        Task DeleteAsync(Student Student); 
+        Task<IEnumerable<Student>> GetAllStudentsAsync(); 
 
         Task SaveChangesAsync(); 
     }

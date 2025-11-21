@@ -1,7 +1,7 @@
 services:
   api:
     build: .
-    container_name: Hospital_api
+    container_name: Estudiantes_api
     ports:
       - "8080:8080"
     environment:
@@ -17,7 +17,7 @@ services:
         condition: service_healthy
   db:
     image: postgres:16
-    container_name: PROYECTO_TEC_WEB
+    container_name: Estudiantes
     restart: unless-stopped
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
